@@ -1,6 +1,6 @@
 import wx
 from wx import Choicebook, Listbook, Notebook, Treebook, Toolbook
-
+from wx import Window
 class HelloFrame(wx.Frame):
 
     def __init__(self, *args, **kw):
@@ -34,30 +34,17 @@ class HelloFrame(wx.Frame):
         helpMenu = wx.Menu()
         aboutItem = helpMenu.Append(wx.ID_ABOUT)
 
-        bookMenu = wx.Menu()
-        bookItem = bookMenu.Append(wx.ID_ANY)
 
         menuBar = wx.MenuBar()
         menuBar.Append(fileMenu, "&File")
         menuBar.Append(helpMenu, "&Help")
-        menuBar.Append(bookMenu, "book")
 
         self.SetMenuBar(menuBar)
 
         self.Bind(wx.EVT_MENU, self.OnHello, helloItem)
         self.Bind(wx.EVT_MENU, self.OnExit, exitItem)
         self.Bind(wx.EVT_MENU, self.OnAbout, aboutItem)
-        self.Bind(wx.EVT_MENU, self.Oncbook, bookItem)
 
-    def bookHello(self):
-
-        cbook = Choicebook()
-        lbook = Listbook()
-        nbook = Notebook()
-        tbook = Toolbook()
-        trbook = Treebook()
-
-        self.Bind(cbook, self.oncbook, )
 
     def OnExit(self, event):
 
@@ -71,14 +58,19 @@ class HelloFrame(wx.Frame):
 
         wx.MessageBox("sanple", "about", wx.OK|wx.ICON_INFORMATION)
 
-    def Oncbook(self, event):
-
-        wx.Choicebook()
     
+class demoWindow(wx.Window):
+
+    def __init__(self, *args, **kw):
+        super(demoWindow, self).__init__(*args, **kw)
 
 if __name__ == '__main__':
 
     app = wx.App()
-    frm = HelloFrame(None, title = '123123')
+    frm = HelloFrame(None, title = 'hello window', pos = wx.Point(500, 500), size = wx.Size(1000, 1000), style = wx.BORDER_DEFAULT, name = "123123")
+    frm.SetBackgroundColour()
+    # wi = wx.Window(frm, wx.ID_ANY, wx.Point(50, 0), wx.Size(100, 100), wx.BORDER_DEFAULT, "123123")
+    # (0,0), (100*100), Window.WindowStyle(), "win")
     frm.Show()
+    # wi.Show()
     app.MainLoop()
